@@ -8,6 +8,7 @@ export default function request(url: String, method: String = 'POST', params: an
             'Content-Type': 'application/json'
         }
     }
+    
     if (option.method === 'POST') {
         option.body = JSON.stringify(params)
     } else {
@@ -22,5 +23,13 @@ export default function request(url: String, method: String = 'POST', params: an
         }
     }
 
-    return fetch(u, option)
+    return new Promise((resolve, reject) => {
+        fetch(u, option).then(response => response.json()).then((result) => {
+            if (result.status) {
+                resolve(result.data)
+            } else {
+                reject(new Error(result.message))
+            }
+        }, reject)
+    })
 }

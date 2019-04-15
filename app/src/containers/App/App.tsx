@@ -1,20 +1,13 @@
 import * as React from 'react'
-import { connect } from 'react-redux'
-import { load } from '../../redux/reducers/public/time'
+import { Link } from '@reach/router'
 
-class App extends React.Component<any, any> {
-    componentDidMount() {
-        const { load } = this.props
-        load()
-    }
+export default class App extends React.Component<any, any> {
     render() {
         return (
             <div>
                 Hello World!
+                <Link to="time">Go to Time</Link>
             </div>
         )
     }
-
 }
-
-export default connect((state: any) => ({time: state.time}), { load })(App)
