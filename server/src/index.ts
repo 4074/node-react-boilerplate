@@ -2,8 +2,11 @@ import * as fs from 'fs'
 import * as path from 'path'
 import * as Koa from 'koa'
 import * as koaStatic from 'koa-static'
+import KPT from 'koa-prop-types'
 
 import config from './config'
+import { ParamsMiddleware, LogMiddleware } from './middlewares'
+import router from './routers'
 
 const app = new Koa()
 
@@ -17,6 +20,11 @@ app.use(async (ctx, next) => {
         await next()
     }
 })
+
+app.use(KPT())
+app.use(ParamsMiddleware())
+app.use(LogMiddleware())
+app.use(router.routes())
 
 app.listen(config.port, () => {
     console.log('Server running on port', config.port)
