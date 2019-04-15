@@ -12,7 +12,6 @@ class App extends React.Component<any, any> {
     }
     render() {
         const { time } = this.props
-        console.log(time)
         return (
             <div>
                 { time.loaded && time.data.date }

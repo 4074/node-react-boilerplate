@@ -2,6 +2,7 @@ const path = require('path')
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
+const MiniCssExtractPlugin = require("mini-css-extract-plugin")
 const config = require('./config')
 
 module.exports = (env = {}) => ({
@@ -11,7 +12,7 @@ module.exports = (env = {}) => ({
         bundle: './src/index.tsx'
     },
     output: {
-        filename: '[name].[hash:8].js',
+        filename: env.production ? '[name].[hash:8].js' : '[name].js',
         path: path.resolve(__dirname, 'build')
     },
 
@@ -23,18 +24,40 @@ module.exports = (env = {}) => ({
 
     module: {
         rules: [
-            {test: /\.tsx?$/, loader: 'awesome-typescript-loader'},
-            {enforce: 'pre', test: /\.js$/, loader: 'source-map-loader'}
+            {test: /\.(t|j)sx?$/, loader: 'babel-loader'},
+            {
+                test: /\.css$/,
+                use: [
+                    MiniCssExtractPlugin.loader,
+                    "css-loader"
+                ]
+            }
         ]
     },
 
-    plugins: [
+    optimization: {
+        splitChunks: {
+            cacheGroups: {
+                commons: {
+                    test: /[\\/]node_modules[\\/]/,
+                    name: 'vendor',
+                    chunks: 'all'
+                }
+            }
+        }
+    },
+
+    plugins:  [
+        new MiniCssExtractPlugin({
+            filename: "bundle.css",
+            chunkFilename: "bundle.[chunkhash:8].css"
+        }),
         new HtmlWebpackPlugin({
             template: 'index.html',
             outputPath: '/'
         }),
         new webpack.HotModuleReplacementPlugin(),
-        new CleanWebpackPlugin()
+        ...(env.production ? [new CleanWebpackPlugin()] : [])
     ],
 
     devServer: {
