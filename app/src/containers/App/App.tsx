@@ -1,7 +1,12 @@
 import * as React from 'react'
+import { connect } from 'react-redux'
+import { load } from '../../redux/reducers/public/time'
 
-export default class App extends React.Component<any, any> {
-    
+class App extends React.Component<any, any> {
+    componentDidMount() {
+        const { load } = this.props
+        load()
+    }
     render() {
         return (
             <div>
@@ -11,3 +16,5 @@ export default class App extends React.Component<any, any> {
     }
 
 }
+
+export default connect((state: any) => ({time: state.time}), { load })(App)
