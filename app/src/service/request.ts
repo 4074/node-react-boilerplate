@@ -1,4 +1,4 @@
-import 'whatwg-fetch'
+// import 'whatwg-fetch'
 
 export default function request(url: String, method: String = 'POST', params: any = {}) {
     let u = '/api/' + url

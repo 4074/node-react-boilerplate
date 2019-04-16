@@ -1,0 +1,31 @@
+{
+  "name": "node-react-boilerplate",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/4074/node-react-boilerplate.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/4074/node-react-boilerplate/issues"
+  },
+  "homepage": "https://github.com/4074/node-react-boilerplate#readme",
+  "dependencies": {
+    "antd": "^3.16.3",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "react-redux": "^7.0.2",
+    "react-router": "^4.3.1",
+    "react-router-dom": "^4.3.1",
+    "redux": "^4.0.1",
+    "redux-async-connect": "^1.0.0-rc4",
+    "redux-thunk": "^2.3.0"
+  }
+}

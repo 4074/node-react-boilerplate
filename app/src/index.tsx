@@ -1,20 +1,13 @@
 import * as React from 'react'
 import * as ReactDOM from 'react-dom'
-import { Provider } from 'react-redux'
-import { Router } from "@reach/router"
+import App from './App'
 
-import { App, Time } from './containers/'
-import createStore from './redux/create'
-
-const store = createStore()
+import { BrowserRouter } from 'react-router-dom'
 
 ReactDOM.render(
-    <Provider store={store} key="provider">
-        <Router>
-            <App path="/" />
-            <Time path="time" />
-        </Router>
-    </Provider>,
+    <BrowserRouter>
+        <App/>
+    </BrowserRouter>,
     document.getElementById('root')
 )
 
